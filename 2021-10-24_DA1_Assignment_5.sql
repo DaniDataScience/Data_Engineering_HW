@@ -1,0 +1,1 @@
+SELECT * FROM us_police_shootings_2015.income_and_poverty_rate_per_race;
