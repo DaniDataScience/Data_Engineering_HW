@@ -25,7 +25,7 @@ My operational layer consists of 5 tables, originally csv files. One for the sho
 - A table on the percentage of pople living below the poverty level, per state and settlement
 
 The detailed content of each table can be seen in the image below:
-<img height= 500 src="https://github.com/DaniDataScience/Data_Engineering_HW/blob/main/Term_Project/Pictures/EER_diagram.png">
+<img height= 500 src="https://github.com/DaniDataScience/Data_Engineering_HW/blob/main/Term_Project/Pictures/EER_diagram_vf.png">
 
 
 <img height= 500 src="https://github.com/DaniDataScience/Data_Engineering_HW/blob/main/Term_Project/Pictures/Analytics_plan.png">
