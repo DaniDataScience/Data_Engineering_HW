@@ -24,14 +24,84 @@ My operational layer consists of 5 tables, originally csv files. One for the sho
 - A table on the share of ethnic races in % per state and settlement
 - A table on the percentage of pople living below the poverty level, per state and settlement
 
-The detailed content of each table can be seen in the image below:
+Median Household Income Table:
+**Key**	| **Description**	| **Type** | **Sample Value**
+----| ---------------- | ----| -------------
+State	| US state |	VARCHAR(8) |	NY
+City	| city	| VARCHAR(250)	| New York
+Median Income	| Median household income per state and city | INTEGER	| 124564
+
+Percentage below poverty level Table:
+**Key**	| **Description**	| **Type** | **Sample Value**
+----| ------------ | ----| -------------
+State	| US state |	VARCHAR(8) |	NY
+City	| city	| VARCHAR(250)	| New York
+Avg poverty rate	| Percentage of population per state per city living under the poverty level	| DOUBLE	| 6.6
+
+People over 25 completed high school Table:
+**Key**	| **Description**	| **Type** | **Sample Value**
+----| ------------ | ----| -------------
+State	| US state |	VARCHAR(8) |	NY
+City	| city	| VARCHAR(250)	| New York
+Percent completed highschool	| Average percentage of state population above 25 years old who have graduated high school	| DOUBLE	| 22.2
+
+Share of race by city Table:
+**Key**	| **Description**	| **Type** | **Sample Value**
+----| ------------ | ----| -------------
+State	| US state |	VARCHAR(8) |	NY
+City	| city	| VARCHAR(250)	| New York
+B	| Black ethnicity	| DOUBLE	| 4.6
+H	| Hispanic ethnicity	| DOUBLE	| 6.0
+N	| Native american	| DOUBLE	| 52.0
+H	| Hispanic	| DOUBLE	| 17.2
+A	| Asian	| DOUBLE	| 7.4
+W	| White ethnicity	| DOUBLE	| 8.0
+
+Plice shootin incidents Table:
+**Key**	| **Description**	| **Type** | **Sample Value**
+----| ------------ | ----| -------------
+id	| Data table id of fatal shooting	| INT	| 125
+name	| Shooting victim name	| VARCHAR(255)	| Tim Elliot
+date	| Date of fatal shooting	| DATE	| 2015-02-01
+manner_of_death	| Manner of fatal police killing	| VARCHAR(50)	| shot
+armed	| Indicates if the victim was armed with some sort of weapon that a police officer believed could cause harm	| VARCHAR(50)	| unarmed
+age	| Age of victim	| INT	| 53
+gender	| Gender of victim	| VARCHAR(50)	| M
+race	| Race of victim	| VARCHAR(50) | W
+city	| City of fatal police shooting	| VARCHAR(50)	| Essex
+signs_of_mental_illness	| Mental illness status of victim	| VARCHAR(50)	| TRUE
+threat_level	| Threat level of victim	| VARCHAR(50)	| attack
+flee	| Flee status of victim during fatal shooting	| VARCHAR(50)	| Not fleeing
+body_camera	| Body camera status of police officer who committed fatal police shooting	| VARCHAR(50)	| FALSE
+
+
+The operational layer needed cleaning for the following issues
+ - ID needs for aux tables to be created based on Sate & City combination 
+ - cities have "town", or "city" words added to the city name in the auxiliary tables 
+ - cities are duplicated in the auxiliary tables with "CDP" edings, e.g. "Washington" and "Washington CDP"
+
+Also I created a new calculated column to determine if the balck population is in a minority or in a majority within the Share of Race table, called Black_pop_ratio
+
+This resulte in the following operational layer
 <img height= 500 src="https://github.com/DaniDataScience/Data_Engineering_HW/blob/main/Term_Project/Pictures/EER_diagram_vf.png">
 
+##Analytics plan
+
+My analytics plan is the following:
+
+- Loading up the acquired data
+- Create ETL pipeline to create a denormalised data warehouse
+- Create ETL pipeline to create data marts for the three analytical teams
+
+To create the analytica layer, I used the comibnation of city & state in the auxiliary tables to join the ethnic and social data to the shootings2015 table.
 
 <img height= 500 src="https://github.com/DaniDataScience/Data_Engineering_HW/blob/main/Term_Project/Pictures/Analytics_plan.png">
 
-
+Joining the selected columns resulted in teh following datawarehouse
 <img height= 500 src="https://github.com/DaniDataScience/Data_Engineering_HW/blob/main/Term_Project/Pictures/Data_Warehouse.png">
 
+Using this datawarehouse, I created data marts to anwser each specific question
+
+##Data marts
 
 
