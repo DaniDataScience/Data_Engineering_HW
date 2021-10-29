@@ -80,16 +80,19 @@ The operational layer needed cleaning for the following issues
  - cities have "town", or "city" words added to the city name in the auxiliary tables 
  - cities are duplicated in the auxiliary tables with "CDP" edings, e.g. "Washington" and "Washington CDP"
 
-Also I created a new calculated column to determine if the balck population is in a minority or in a majority within the Share of Race table, called Black_pop_ratio
+I created a new calculated column to determine if the balck population is in a minority or in a majority within the Share of Race table, called Black_pop_ratio.
+I also created a column caled id for the auxilary tables, where i combined city and state, as a unique indentifier (as city names were duplicated along various states)
+
 
 This resulte in the following operational layer
 <img height= 500 src="https://github.com/DaniDataScience/Data_Engineering_HW/blob/main/Term_Project/Pictures/EER_diagram_vf.png">
 
-##Analytics plan
+## Analytics plan
 
 My analytics plan is the following:
 
-- Loading up the acquired data
+- Loading up the acquired data with initial data cleaning (e.g. getting rid of "-" and "(X)" as missing values
+- Rurther cleaning the data using stored procdures and creating a trigger that notifies when a new row is added to the police shootings table
 - Create ETL pipeline to create a denormalised data warehouse
 - Create ETL pipeline to create data marts for the three analytical teams
 
@@ -97,11 +100,22 @@ To create the analytica layer, I used the comibnation of city & state in the aux
 
 <img height= 500 src="https://github.com/DaniDataScience/Data_Engineering_HW/blob/main/Term_Project/Pictures/Analytics_plan.png">
 
-Joining the selected columns resulted in teh following datawarehouse
+Joining the selected columns resulted in the following datawarehouse, which includes all the variables I need to anwser my analytical questions
 <img height= 500 src="https://github.com/DaniDataScience/Data_Engineering_HW/blob/main/Term_Project/Pictures/Data_Warehouse.png">
 
 Using this datawarehouse, I created data marts to anwser each specific question
 
-##Data marts
+## Data marts
 
+### Number of shootings
+From this simple mart we see that in 2015, there were 2535 incidents
 
+### Shooting distribution by race
+This data mart shows the distribution of he 2535 shootings among the different ethnicities. We get to know that 47% (1201) of victims were white, 24% (618) were black, 17% (423) were hispanic, and the rest were native american, asion or other. Also we see that in 195 cases the race of the victim was not recorded
+
+### Black minority/majority
+This data mart zooms into incidents where the victim was black, and shows wether the black community was a majority or a minority in the settlement.
+It is surpizing to see that in 71% of these indicents, the victim was living as a minority in the settlement! Ony 16% of black victims were living as a majority in the settlement. 
+
+### Median income per race and Poverty level per race
+These tables show the minimum, maximum, average and std. of the median income and the poverty level for each location where an incident occured, segmented accordingly to the ethnicity of the victim. 
